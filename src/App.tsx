@@ -7,6 +7,7 @@ import Trending from '@/pages/Trending';
 import Notifications from '@/pages/Notifications';
 import Search from '@/pages/Search';
 import Upload from '@/pages/Upload';
+import Login from '@/pages/Login';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/search" element={<Search />} />
         <Route path="/upload" element={<Upload />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </div>
