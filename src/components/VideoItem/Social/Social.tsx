@@ -5,6 +5,7 @@ import {
   AiOutlineShareAlt,
   AiOutlinePlus,
 } from 'react-icons/ai';
+import numeral from 'numeral';
 
 import styles from './Social.module.css';
 import { Video } from '@/types/entities/video.entity';
@@ -28,12 +29,17 @@ const Social = ({ video }: SocialProps) => {
       </Link>
       <button type="button" className={styles.btn}>
         <AiFillHeart color={iconColor} size={normalIconSize} />
+        <span className={styles.btnLabel}>
+          {numeral(video.likedBy.length).format('0.0a')}
+        </span>
       </button>
       <button type="button" className={styles.btn}>
         <AiOutlineComment color={iconColor} size={normalIconSize} />
+        <span className={styles.btnLabel}>{numeral(30000).format('0.0a')}</span>
       </button>
       <button type="button" className={styles.btn}>
         <AiOutlineShareAlt color={iconColor} size={normalIconSize} />
+        <span className={styles.btnLabel}>{numeral(30000).format('0.0a')}</span>
       </button>
     </div>
   );

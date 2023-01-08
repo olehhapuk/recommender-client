@@ -4,7 +4,7 @@
   bottom: 17%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -12,8 +12,15 @@
   background-color: transparent;
   border: none;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+}
+
+.btnLabel {
+  margin-top: 2px;
+  color: #fff;
 }
 
 .profileBtn {

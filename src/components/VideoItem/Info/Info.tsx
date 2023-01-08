@@ -15,10 +15,7 @@ const Info = ({ video }: InfoProps) => {
     setDescriptionVisible((prev) => !prev);
   }
 
-  const shortDescription = video.author.description
-    .slice(0, 80)
-    .trim()
-    .concat('...');
+  const shortDescription = video.description.slice(0, 80).trim().concat('...');
 
   return (
     <div className={styles.info}>
