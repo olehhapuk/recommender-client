@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Trending />} />
         <Route path="/feed" element={<Feed />} />
-        <Route path="/profile/:profileId" element={<Profile />} />
+        <Route path="/profile/:profileId/*" element={<Profile />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/search" element={<Search />} />
         <Route path="/upload" element={<Upload />} />

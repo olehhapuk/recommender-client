@@ -1,16 +1,23 @@
 import { useQuery } from 'react-query';
-import { Link, useParams } from 'react-router-dom';
+import {
+  Link,
+  useParams,
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { BsThreeDots } from 'react-icons/bs';
 import { BsPlay, BsArrowLeftShort } from 'react-icons/bs';
 import numeral from 'numeral';
+import { useState } from 'react';
 
 import styles from './Profile.module.css';
 import { fetchUserById, fetchUserVideos } from '@/services/users';
 import { User } from '@/types/entities/user.entity';
 import { Video } from '@/types/entities/video.entity';
 import Stats from './Stats';
-import VideosList from '@/components/VideosList';
-import { useState } from 'react';
+import UserVideos from './UserVideos';
 
 interface ProfileRouteParams {
   profileId: string;
@@ -20,13 +27,15 @@ const Profile = () => {
   const { profileId } = useParams<
     keyof ProfileRouteParams
   >() as ProfileRouteParams;
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const userQuery = useQuery<User>('user', () => fetchUserById(+profileId));
   const userVideosQuery = useQuery<Video[]>('userVideos', () =>
     fetchUserVideos(+profileId)
   );
 
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [activeVideoIndex, setActiveVideoIndex] = useState<number>(-1);
 
   return (
     <div className={styles.profile}>
@@ -65,7 +74,12 @@ const Profile = () => {
                   <div
                     key={video.id}
                     className={styles.videoItem}
-                    onClick={() => setIsPlaying(true)}
+                    onClick={() => {
+                      const videoIndex = userVideosQuery.data.findIndex(
+                        ({ id }) => id === video.id
+                      );
+                      navigate(`${location.pathname}/videos/${videoIndex}`);
+                    }}
                   >
                     <video
                       src={video.videoUrl}
@@ -82,17 +96,18 @@ const Profile = () => {
               </div>
             )}
 
-          {userVideosQuery.data && isPlaying && (
-            <div className={styles.videosList}>
-              <VideosList videos={userVideosQuery.data} />
-              <button
-                type="button"
-                className={styles.backBtn}
-                onClick={() => setIsPlaying(false)}
-              >
-                <BsArrowLeftShort color="#fff" size={28} />
-              </button>
-            </div>
+          {userVideosQuery.data && (
+            <Routes>
+              <Route
+                path="/videos/:videoIndex"
+                element={
+                  <UserVideos
+                    profileId={+profileId}
+                    videos={userVideosQuery.data}
+                  />
+                }
+              />
+            </Routes>
           )}
         </>
       )}
