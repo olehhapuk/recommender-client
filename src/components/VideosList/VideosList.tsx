@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import styles from './VideosList.module.css';
@@ -7,13 +7,15 @@ import { Video } from '@/types/entities/video.entity';
 
 interface VideosListProps {
   videos: Video[];
+  initialIndex?: number;
 }
 
-const VideosList = ({ videos }: VideosListProps) => {
+const VideosList = ({ videos, initialIndex }: VideosListProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
 
   return (
     <Swiper
+      initialSlide={initialIndex}
       slidesPerView={1}
       direction="vertical"
       height={window.innerHeight - 54}

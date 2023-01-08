@@ -19,11 +19,9 @@ const UserVideos = ({ profileId, videos }: UserVideosProps) => {
     keyof UserVideosRouteParams
   >() as UserVideosRouteParams;
 
-  const videoIndex = +params.videoIndex;
-
   return (
     <div className={styles.videosList}>
-      <VideosList videos={videos} />
+      <VideosList videos={videos} initialIndex={+params.videoIndex} />
       <Link to={`/profile/${profileId}`} className={styles.backBtn}>
         <BsArrowLeftShort color="#fff" size={28} />
       </Link>
