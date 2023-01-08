@@ -1,0 +1,8 @@
+{
+  "ext": "tsx",
+  "types": {
+    "component": "./src/components",
+    "lib": "./src/lib/ui",
+    "page": "./src/pages"
+  }
+}
