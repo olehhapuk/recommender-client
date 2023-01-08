@@ -1,0 +1,23 @@
+.stats {
+  text-align: center;
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  display: inline-block;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 400;
+  color: #434343;
+}

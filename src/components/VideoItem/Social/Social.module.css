@@ -1,0 +1,48 @@
+.controls {
+  position: absolute;
+  right: 8px;
+  bottom: 17%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileBtn {
+  composes: btn;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.profileBtn > img {
+  object-fit: cover;
+  border-radius: inherit;
+  border: 2px solid #fff;
+}
+
+.followStatus {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  background-color: #fa6060;
+  border: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}

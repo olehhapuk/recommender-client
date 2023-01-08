@@ -1,0 +1,35 @@
+.footer {
+  background-color: #000;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 54px;
+}
+
+.container {
+  height: 100%;
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+}
+
+.link {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+}
+
+.uploadLink {
+  composes: link;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  border-radius: 12px;
+}

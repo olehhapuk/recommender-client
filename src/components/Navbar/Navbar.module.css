@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  text-decoration: none;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.linkActive {
+  composes: link;
+  color: #fff;
+}
