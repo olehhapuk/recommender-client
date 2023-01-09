@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import styles from './Login.module.css';
-import Input from '@/lib/ui/Input';
+import Input from '@/components/ui/Input';
 import { login } from '@/services/auth';
 
 const Login = () => {

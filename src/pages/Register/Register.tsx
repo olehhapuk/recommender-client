@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import styles from './Register.module.css';
-import Input from '@/lib/ui/Input';
+import Input from '@/components/ui/Input';
 import { register } from '@/services/auth';
 
 const Register = () => {
