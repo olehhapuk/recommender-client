@@ -2,7 +2,7 @@
   "ext": "tsx",
   "types": {
     "component": "./src/components",
-    "lib": "./src/lib/ui",
+    "ui": "./src/components/ui",
     "page": "./src/pages"
   }
 }
