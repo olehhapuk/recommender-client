@@ -8,9 +8,9 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { BsThreeDots } from 'react-icons/bs';
-import { BsPlay, BsArrowLeftShort } from 'react-icons/bs';
+import { BsPlay } from 'react-icons/bs';
 import numeral from 'numeral';
-import { useState } from 'react';
+import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
 
 import styles from './Profile.module.css';
 import { fetchUserById, fetchUserVideos } from '@/services/users';
@@ -35,7 +35,8 @@ const Profile = () => {
     fetchUserVideos(+profileId)
   );
 
-  const [activeVideoIndex, setActiveVideoIndex] = useState<number>(-1);
+  const isAuthenticated = useIsAuthenticated()();
+  const user = useAuthUser()() as User;
 
   return (
     <div className={styles.profile}>
@@ -46,9 +47,14 @@ const Profile = () => {
               {userQuery.data.username}
             </span>
 
-            <Link to="/profile/1/settings" className={styles.settings}>
-              <BsThreeDots size={24} />
-            </Link>
+            {isAuthenticated && user.id === userQuery.data.id && (
+              <Link
+                to={`${location.pathname}/settings`}
+                className={styles.settings}
+              >
+                <BsThreeDots size={24} />
+              </Link>
+            )}
           </div>
 
           <div className={styles.info}>
@@ -58,14 +64,20 @@ const Profile = () => {
               alt={userQuery.data.username}
             />
             <p className={styles.username}>@{userQuery.data.username}</p>
+
             <Stats following={90000} followers={90000} likes={2500000} />
-            <button type="button" className={styles.editBtn}>
-              Edit profile
-            </button>
+
+            {isAuthenticated && user.id == userQuery.data.id && (
+              <button type="button" className={styles.editBtn}>
+                Edit profile
+              </button>
+            )}
+
             <p className={styles.description}>
               {userQuery.data.description.slice(0, 80)}
             </p>
           </div>
+
           {!userVideosQuery.isLoading &&
             !userVideosQuery.isError &&
             userVideosQuery.data && (
