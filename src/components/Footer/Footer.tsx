@@ -18,9 +18,7 @@ const iconColor = '#fff';
 const plusIconColor = '#000';
 
 const Footer = () => {
-  const auth = useAuthUser();
-
-  const user = auth() as User;
+  const user = useAuthUser()() as User;
 
   return (
     <div className={styles.footer}>
@@ -49,7 +47,10 @@ const Footer = () => {
             )
           }
         </NavLink>
-        <NavLink to={`/profile/${user.id}`} className={styles.link}>
+        <NavLink
+          to={user ? `/profile/${user.id}` : '/login'}
+          className={styles.link}
+        >
           {({ isActive }) =>
             isActive ? (
               <IoPerson size={iconSize} color={iconColor} />
