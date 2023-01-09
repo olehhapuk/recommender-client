@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import styles from './Login.module.css';
+import styles from './Register.module.css';
 import Input from '@/lib/ui/Input';
 
 const Register = () => {
   return (
     <form className={styles.form}>
-      <h1 className={styles.title}>Login</h1>
+      <h1 className={styles.title}>Register</h1>
       <div className={styles.fieldsList}>
         <div className={styles.field}>
           <Input type="text" placeholder="Username" required />

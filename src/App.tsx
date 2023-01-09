@@ -8,6 +8,7 @@ import Notifications from '@/pages/Notifications';
 import Search from '@/pages/Search';
 import Upload from '@/pages/Upload';
 import Login from '@/pages/Login';
+import Register from '@/pages/Register';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
       <Footer />
     </div>
