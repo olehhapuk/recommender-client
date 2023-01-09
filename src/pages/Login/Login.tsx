@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 import styles from './Login.module.css';
 import Input from '@/components/ui/Input';
@@ -28,7 +27,6 @@ const Login = () => {
           });
 
           if (result) {
-            axios.defaults.headers.authorization = `Bearer ${accessToken}`;
             navigate('/');
           } else {
             console.log('Auth error');

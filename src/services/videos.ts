@@ -7,7 +7,11 @@ export const fetchTrending = async (): Promise<Video[]> => {
   return response.data;
 };
 
-export const fetchFeed = async (): Promise<Video[]> => {
-  const response = await axios.get('/feed');
+export const fetchFeed = async (authHeader: string): Promise<Video[]> => {
+  const response = await axios.get('/feed', {
+    headers: {
+      authorization: authHeader,
+    },
+  });
   return response.data;
 };
