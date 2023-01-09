@@ -1,0 +1,45 @@
+.container {
+  padding: 30px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.videoPreview {
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+}
+
+.btn {
+  border: 1px solid transparent;
+  background-color: #ed4040;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  margin-top: 12px;
+  display: block;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn:disabled {
+  background-color: #d0d4e3;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  composes: btn;
+  background-color: #fff;
+  border-color: #d0d4e3;
+  color: #000;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}

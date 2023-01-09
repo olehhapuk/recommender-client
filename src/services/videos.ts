@@ -15,3 +15,37 @@ export const fetchFeed = async (authHeader: string): Promise<Video[]> => {
   });
   return response.data;
 };
+
+export const uploadVideoFile = async (
+  authHeader: string,
+  videoFile: File
+): Promise<{ videoName: string; thumbnailUrl: string }> => {
+  const formData = new FormData();
+  formData.append('video', videoFile);
+
+  const response = await axios.post('/videos/upload', formData, {
+    headers: {
+      authorization: authHeader,
+    },
+  });
+  return response.data;
+};
+
+interface CreateVideoDto {
+  description: string;
+  tags: string[];
+  thumbnailUrl: string;
+  videoUrl: string;
+}
+
+export const createVideo = async (
+  authHeader: string,
+  data: CreateVideoDto
+): Promise<Video> => {
+  const response = await axios.post('/videos', data, {
+    headers: {
+      authorization: authHeader,
+    },
+  });
+  return response.data;
+};
