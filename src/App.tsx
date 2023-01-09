@@ -9,17 +9,41 @@ import Search from '@/pages/Search';
 import Upload from '@/pages/Upload';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
+import PrivateRoute from '@/components/PrivateRoute';
+
+const loginPath = '/login';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Trending />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route
+          path="/feed"
+          element={
+            <PrivateRoute loginPath={loginPath}>
+              <Feed />
+            </PrivateRoute>
+          }
+        />
         <Route path="/profile/:profileId/*" element={<Profile />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route
+          path="/notifications"
+          element={
+            <PrivateRoute loginPath={loginPath}>
+              <Notifications />
+            </PrivateRoute>
+          }
+        />
         <Route path="/search" element={<Search />} />
-        <Route path="/upload" element={<Upload />} />
+        <Route
+          path="/upload"
+          element={
+            <PrivateRoute loginPath={loginPath}>
+              <Upload />
+            </PrivateRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
       </Routes>
