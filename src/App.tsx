@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import Footer from '@/components/Footer';
+import PrivateRoute from '@/components/PrivateRoute';
 import Feed from '@/pages/Feed';
 import Profile from '@/pages/Profile';
 import Trending from '@/pages/Trending';
@@ -9,7 +10,7 @@ import Search from '@/pages/Search';
 import Upload from '@/pages/Upload';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
-import PrivateRoute from '@/components/PrivateRoute';
+import Settings from '@/pages/Settings';
 
 const loginPath = '/login';
 
@@ -23,6 +24,14 @@ function App() {
           element={
             <PrivateRoute loginPath={loginPath}>
               <Feed />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:profileId/settings"
+          element={
+            <PrivateRoute loginPath={loginPath}>
+              <Settings />
             </PrivateRoute>
           }
         />
