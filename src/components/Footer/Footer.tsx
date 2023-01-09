@@ -8,14 +8,20 @@ import {
   AiOutlineBell,
 } from 'react-icons/ai';
 import { IoPerson, IoPersonOutline } from 'react-icons/io5';
+import { useAuthUser } from 'react-auth-kit';
 
 import styles from './Footer.module.css';
+import { User } from '@/types/entities/user.entity';
 
 const iconSize = 28;
 const iconColor = '#fff';
 const plusIconColor = '#000';
 
 const Footer = () => {
+  const auth = useAuthUser();
+
+  const user = auth() as User;
+
   return (
     <div className={styles.footer}>
       <div className={styles.container}>
@@ -43,7 +49,7 @@ const Footer = () => {
             )
           }
         </NavLink>
-        <NavLink to="/profile/1" className={styles.link}>
+        <NavLink to={`/profile/${user.id}`} className={styles.link}>
           {({ isActive }) =>
             isActive ? (
               <IoPerson size={iconSize} color={iconColor} />
