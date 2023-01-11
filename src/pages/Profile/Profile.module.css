@@ -68,8 +68,8 @@
 }
 
 .followBtn:disabled {
-  background-color: #d0d4e3;
-  cursor: not-allowed;
+  background-color: #f67171;
+  cursor: default;
 }
 
 .description {
