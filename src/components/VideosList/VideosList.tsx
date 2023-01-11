@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import styles from './VideosList.module.css';
@@ -12,6 +12,14 @@ interface VideosListProps {
 
 const VideosList = ({ videos, initialIndex }: VideosListProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
+
+  useEffect(() => {
+    document.body.style.overflowY = 'hidden';
+
+    return () => {
+      document.body.style.overflowY = 'auto';
+    };
+  }, []);
 
   return (
     <Swiper

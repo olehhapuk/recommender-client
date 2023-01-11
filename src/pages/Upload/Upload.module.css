@@ -4,8 +4,7 @@ Remove scroll restriction from body and isolate it only to video player
 */
 .container {
   padding: 30px;
-  overflow-y: scroll;
-  height: calc(100vh - 100px);
+  margin-bottom: 54px;
 }
 
 .fields {
