@@ -25,3 +25,13 @@ export async function register(
   const res = await axios.post('/auth/register', userData);
   return res.data;
 }
+
+export async function getProfile(authHeader: string): Promise<User> {
+  const res = await axios.get('/auth/profile', {
+    headers: {
+      authorization: authHeader,
+    },
+  });
+
+  return res.data;
+}

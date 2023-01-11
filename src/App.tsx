@@ -1,5 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
+import { useSignOut, useAuthHeader, useIsAuthenticated } from 'react-auth-kit';
+import { useEffect } from 'react';
 
+import { getProfile } from '@/services/auth';
 import Footer from '@/components/Footer';
 import PrivateRoute from '@/components/PrivateRoute';
 import Feed from '@/pages/Feed';
@@ -15,6 +18,18 @@ import Settings from '@/pages/Settings';
 const loginPath = '/login';
 
 function App() {
+  const signOut = useSignOut();
+  const getAuthHeader = useAuthHeader();
+  const getIsAuthenticated = useIsAuthenticated();
+
+  useEffect(() => {
+    if (!getIsAuthenticated()) {
+      return;
+    }
+
+    getProfile(getAuthHeader()).catch(() => signOut());
+  }, [getIsAuthenticated]);
+
   return (
     <div className="App">
       <Routes>
