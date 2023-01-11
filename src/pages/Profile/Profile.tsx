@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import {
   Link,
   useParams,
@@ -10,14 +10,20 @@ import {
 import { BsThreeDots } from 'react-icons/bs';
 import { BsPlay } from 'react-icons/bs';
 import numeral from 'numeral';
-import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
+import { useAuthUser, useIsAuthenticated, useAuthHeader } from 'react-auth-kit';
 
 import styles from './Profile.module.css';
-import { fetchUserById, fetchUserVideos } from '@/services/users';
+import {
+  fetchUserById,
+  fetchUserVideos,
+  follow,
+  unfollow,
+} from '@/services/users';
 import { User } from '@/types/entities/user.entity';
 import { Video } from '@/types/entities/video.entity';
 import Stats from './Stats';
 import UserVideos from './UserVideos';
+import { useMemo } from 'react';
 
 interface ProfileRouteParams {
   profileId: string;
@@ -29,14 +35,41 @@ const Profile = () => {
   >() as ProfileRouteParams;
   const location = useLocation();
   const navigate = useNavigate();
+  const authHeader = useAuthHeader();
+  const queryClient = useQueryClient();
 
   const userQuery = useQuery<User>('user', () => fetchUserById(+profileId));
   const userVideosQuery = useQuery<Video[]>('userVideos', () =>
     fetchUserVideos(+profileId)
   );
+  const followMutation = useMutation(
+    (data: { id: number; authHeader: string }) =>
+      follow(data.id, data.authHeader),
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData('user', data);
+      },
+    }
+  );
+  const unfollowMutation = useMutation(
+    (data: { id: number; authHeader: string }) =>
+      unfollow(data.id, data.authHeader),
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData('user', data);
+      },
+    }
+  );
 
   const isAuthenticated = useIsAuthenticated()();
   const user = useAuthUser()() as User;
+
+  const isFollowing = useMemo(
+    () =>
+      userQuery.data &&
+      !!userQuery.data.followers.find(({ id }) => id === user.id),
+    [userQuery]
+  );
 
   return (
     <div className={styles.profile}>
@@ -67,11 +100,43 @@ const Profile = () => {
 
             <Stats following={90000} followers={90000} likes={2500000} />
 
-            {isAuthenticated && user.id == userQuery.data.id && (
+            {isAuthenticated && user.id === userQuery.data.id && (
               <button type="button" className={styles.editBtn}>
                 Edit profile
               </button>
             )}
+
+            {isAuthenticated &&
+              user.id !== userQuery.data.id &&
+              (isFollowing ? (
+                <button
+                  type="button"
+                  className={styles.followBtn}
+                  onClick={() =>
+                    unfollowMutation.mutate({
+                      id: +profileId,
+                      authHeader: authHeader(),
+                    })
+                  }
+                  disabled={unfollowMutation.isLoading}
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.followBtn}
+                  onClick={() =>
+                    followMutation.mutate({
+                      id: +profileId,
+                      authHeader: authHeader(),
+                    })
+                  }
+                  disabled={followMutation.isLoading}
+                >
+                  Follow
+                </button>
+              ))}
 
             <p className={styles.description}>
               {userQuery.data.description.slice(0, 80)}

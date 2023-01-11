@@ -6,4 +6,6 @@ export interface User {
   password: string;
   description: string;
   avatarUrl: string;
+  followers: User[];
+  following: User[];
 }
