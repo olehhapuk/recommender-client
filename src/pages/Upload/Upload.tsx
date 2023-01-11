@@ -14,6 +14,8 @@ const Upload = () => {
   const getUser = useAuthUser();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoFileData, setVideoFileData] = useState<{
     videoName: string;
@@ -30,15 +32,18 @@ const Upload = () => {
         return;
       }
 
+      setIsLoading(true);
       createVideo(authHeader(), {
         description: values.description,
         tags: values.tags.split(','),
         thumbnailUrl: videoFileData.thumbnailUrl,
         videoUrl: `${import.meta.env.VITE_API_URL}/${videoFileData.videoName}`,
-      }).then(() => {
-        const user = getUser() as User;
-        navigate(`/profile/${user.id}`);
-      });
+      })
+        .then(() => {
+          const user = getUser() as User;
+          navigate(`/profile/${user.id}`);
+        })
+        .finally(() => setIsLoading(false));
     },
   });
 
@@ -50,9 +55,12 @@ const Upload = () => {
     const file = e.target.files[0];
     setVideoFile(file);
 
-    uploadVideoFile(authHeader(), file).then((res) => {
-      setVideoFileData(res);
-    });
+    setIsLoading(true);
+    uploadVideoFile(authHeader(), file)
+      .then((res) => {
+        setVideoFileData(res);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   const videoFileUrl = useMemo(
@@ -71,9 +79,10 @@ const Upload = () => {
             onChange={handleFileSelect}
             id="videoUploadInput"
             style={{ display: 'none' }}
+            disabled={isLoading}
           />
           <label htmlFor="videoUploadInput" className={styles.btnGhost}>
-            Select video
+            {isLoading ? 'Loading...' : 'Select video'}
           </label>
         </div>
       ) : (
@@ -103,8 +112,8 @@ const Upload = () => {
             />
           </div>
 
-          <button type="submit" className={styles.btn}>
-            Upload
+          <button type="submit" className={styles.btn} disabled={isLoading}>
+            {isLoading ? 'Loading...' : 'Upload'}
           </button>
         </form>
       )}
