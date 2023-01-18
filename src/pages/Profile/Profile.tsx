@@ -23,7 +23,7 @@ import { User } from '@/types/entities/user.entity';
 import { Video } from '@/types/entities/video.entity';
 import Stats from './Stats';
 import UserVideos from './UserVideos';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 interface ProfileRouteParams {
   profileId: string;
@@ -42,6 +42,14 @@ const Profile = () => {
   const userVideosQuery = useQuery<Video[]>('userVideos', () =>
     fetchUserVideos(+profileId)
   );
+
+  useEffect(() => {
+    if (userQuery.data && userQuery.data.id !== +profileId) {
+      userQuery.refetch();
+      userVideosQuery.refetch();
+    }
+  }, [profileId]);
+
   const followMutation = useMutation(
     (data: { id: number; authHeader: string }) =>
       follow(data.id, data.authHeader),
@@ -98,7 +106,10 @@ const Profile = () => {
             />
             <p className={styles.username}>@{userQuery.data.username}</p>
 
-            <Stats following={90000} followers={90000} likes={2500000} />
+            <Stats
+              following={userQuery.data.following.length}
+              followers={userQuery.data.followers.length}
+            />
 
             {/* {isAuthenticated && user.id === userQuery.data.id && (
               <button type="button" className={styles.editBtn}>
