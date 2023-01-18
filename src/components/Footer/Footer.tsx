@@ -35,18 +35,6 @@ const Footer = () => {
         <NavLink to="/search" className={styles.link}>
           <AiOutlineSearch size={iconSize} color={iconColor} />
         </NavLink>
-        <NavLink to="/upload" className={styles.uploadLink}>
-          <AiOutlinePlus size={iconSize} color={plusIconColor} />
-        </NavLink>
-        {/* <NavLink to="/notifications" className={styles.link}>
-          {({ isActive }) =>
-            isActive ? (
-              <AiFillBell size={iconSize} color={iconColor} />
-            ) : (
-              <AiOutlineBell size={iconSize} color={iconColor} />
-            )
-          }
-        </NavLink> */}
         <NavLink
           to={user ? `/profile/${user.id}` : '/login'}
           className={styles.link}
@@ -59,6 +47,18 @@ const Footer = () => {
             )
           }
         </NavLink>
+        <NavLink to="/upload" className={styles.uploadLink}>
+          <AiOutlinePlus size={iconSize} color={plusIconColor} />
+        </NavLink>
+        {/* <NavLink to="/notifications" className={styles.link}>
+          {({ isActive }) =>
+            isActive ? (
+              <AiFillBell size={iconSize} color={iconColor} />
+            ) : (
+              <AiOutlineBell size={iconSize} color={iconColor} />
+            )
+          }
+        </NavLink> */}
       </div>
     </div>
   );
