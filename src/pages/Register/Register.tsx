@@ -12,6 +12,7 @@ const Register = () => {
     initialValues: {
       username: '',
       password: '',
+      email: '',
     },
     onSubmit: (values) => {
       register(values).then(() => {
@@ -31,6 +32,17 @@ const Register = () => {
             required
             name="username"
             value={formik.values.username}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+        </div>
+        <div className={styles.field}>
+          <Input
+            type="email"
+            placeholder="Email"
+            required
+            name="email"
+            value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />

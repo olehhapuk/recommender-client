@@ -10,6 +10,7 @@ interface LoginUserDto {
 interface RegisterUserDto {
   username: string;
   password: string;
+  email: string;
 }
 
 export async function login(
