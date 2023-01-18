@@ -73,15 +73,19 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
 
   return (
     <div className={styles.item}>
-      <video
-        ref={videoRef}
-        className={styles.video}
-        src={video.videoUrl}
-        muted
-        onClick={togglePause}
-        loop
-        data-video
-      />
+      {isPlaying || videoRef.current ? (
+        <video
+          ref={videoRef}
+          className={styles.video}
+          src="/Sample-Video-File-For-Testing.mp4"
+          muted
+          onClick={togglePause}
+          loop
+          data-video
+        />
+      ) : (
+        <img src={video.thumbnailUrl} className={styles.video} />
+      )}
       <CSSTransition
         in={!isActuallyPlaying}
         timeout={200}
