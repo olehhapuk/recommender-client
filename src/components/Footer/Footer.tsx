@@ -38,7 +38,7 @@ const Footer = () => {
         <NavLink to="/upload" className={styles.uploadLink}>
           <AiOutlinePlus size={iconSize} color={plusIconColor} />
         </NavLink>
-        <NavLink to="/notifications" className={styles.link}>
+        {/* <NavLink to="/notifications" className={styles.link}>
           {({ isActive }) =>
             isActive ? (
               <AiFillBell size={iconSize} color={iconColor} />
@@ -46,7 +46,7 @@ const Footer = () => {
               <AiOutlineBell size={iconSize} color={iconColor} />
             )
           }
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to={user ? `/profile/${user.id}` : '/login'}
           className={styles.link}

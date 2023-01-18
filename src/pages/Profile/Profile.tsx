@@ -100,11 +100,11 @@ const Profile = () => {
 
             <Stats following={90000} followers={90000} likes={2500000} />
 
-            {isAuthenticated && user.id === userQuery.data.id && (
+            {/* {isAuthenticated && user.id === userQuery.data.id && (
               <button type="button" className={styles.editBtn}>
                 Edit profile
               </button>
-            )}
+            )} */}
 
             {isAuthenticated &&
               user.id !== userQuery.data.id &&
