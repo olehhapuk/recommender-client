@@ -33,3 +33,10 @@ export const unfollow = async (
   });
   return response.data;
 };
+
+export const searchUsers = async (query: string): Promise<User[]> => {
+  const response = await axios.get('/users', {
+    params: { query },
+  });
+  return response.data;
+}
