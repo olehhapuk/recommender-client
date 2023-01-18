@@ -1,0 +1,24 @@
+.container {
+  padding: 30px 12px;
+}
+
+.logoutBtn {
+  border: 1px solid transparent;
+  background-color: #ed4040;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.logoutBtn:disabled {
+  background-color: #f67171;
+  cursor: default;
+}

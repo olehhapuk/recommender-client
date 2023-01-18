@@ -6,8 +6,8 @@ const Settings = () => {
   const signOut = useSignOut();
 
   return (
-    <div>
-      <button type="button" onClick={signOut}>
+    <div className={styles.container}>
+      <button type="button" onClick={signOut} className={styles.logoutBtn}>
         Logout
       </button>
     </div>
