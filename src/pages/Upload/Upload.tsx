@@ -18,7 +18,7 @@ const Upload = () => {
 
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoFileData, setVideoFileData] = useState<{
-    videoName: string;
+    videoUrl: string;
     thumbnailUrl: string;
   } | null>(null);
 
@@ -37,7 +37,7 @@ const Upload = () => {
         description: values.description,
         tags: values.tags.split(','),
         thumbnailUrl: videoFileData.thumbnailUrl,
-        videoUrl: `${import.meta.env.VITE_API_URL}/${videoFileData.videoName}`,
+        videoUrl: videoFileData.videoUrl,
       })
         .then(() => {
           const user = getUser() as User;
@@ -57,9 +57,7 @@ const Upload = () => {
 
     setIsLoading(true);
     uploadVideoFile(authHeader(), file)
-      .then((res) => {
-        setVideoFileData(res);
-      })
+      .then((res) => setVideoFileData(res))
       .finally(() => setIsLoading(false));
   }
 

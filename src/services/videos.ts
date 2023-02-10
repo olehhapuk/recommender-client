@@ -19,7 +19,7 @@ export const fetchFeed = async (authHeader: string): Promise<Video[]> => {
 export const uploadVideoFile = async (
   authHeader: string,
   videoFile: File
-): Promise<{ videoName: string; thumbnailUrl: string }> => {
+): Promise<{ videoUrl: string; thumbnailUrl: string }> => {
   const formData = new FormData();
   formData.append('video', videoFile);
 
