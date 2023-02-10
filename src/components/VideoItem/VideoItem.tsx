@@ -77,7 +77,7 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
         <video
           ref={videoRef}
           className={styles.video}
-          src="/Sample-Video-File-For-Testing.mp4"
+          src={video.videoUrl}
           muted
           onClick={togglePause}
           loop
