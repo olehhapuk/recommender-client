@@ -23,15 +23,19 @@ const Info = ({ video }: InfoProps) => {
 
       <div>
         <p className={styles.description}>
-          {descriptionVisible ? video.description : shortDescription}
+          {descriptionVisible || video.description.length < 80
+            ? video.description
+            : shortDescription}
         </p>
-        <button
-          type="button"
-          className={styles.moreDescriptionBtn}
-          onClick={toggleDescription}
-        >
-          {descriptionVisible ? 'less' : 'more'}
-        </button>
+        {video.description.length >= 80 && (
+          <button
+            type="button"
+            className={styles.moreDescriptionBtn}
+            onClick={toggleDescription}
+          >
+            {descriptionVisible ? 'less' : 'more'}
+          </button>
+        )}
       </div>
 
       <div className={styles.tagsList}>
