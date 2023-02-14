@@ -120,13 +120,24 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
       </CSSTransition>
       <Social video={video} />
       <Info video={video} />
-      <button type="button" className={styles.volumeBtn} onClick={toggleVolume}>
-        {isMuted ? (
-          <BsVolumeMuteFill color="#fff" size={28} />
-        ) : (
-          <BsVolumeDownFill color="#fff" size={28} />
-        )}
-      </button>
+      <CSSTransition
+        in={!isActuallyPlaying || isMuted}
+        timeout={200}
+        classNames={pauseFadeStyles}
+        unmountOnExit
+      >
+        <button
+          type="button"
+          className={styles.volumeBtn}
+          onClick={toggleVolume}
+        >
+          {isMuted ? (
+            <BsVolumeMuteFill color="#fff" size={28} />
+          ) : (
+            <BsVolumeDownFill color="#fff" size={28} />
+          )}
+        </button>
+      </CSSTransition>
     </div>
   );
 };
