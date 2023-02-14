@@ -102,7 +102,7 @@ const Upload = () => {
             />
             <Input
               type="text"
-              placeholder="Add hashtags"
+              placeholder="Add hashtags (ex: tag1,tag2,tag3)"
               name="tags"
               value={formik.values.tags}
               onChange={formik.handleChange}
