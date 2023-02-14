@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { BsPlayFill, BsPauseFill } from 'react-icons/bs';
+import {
+  BsPlayFill,
+  BsPauseFill,
+  BsVolumeDownFill,
+  BsVolumeMuteFill,
+} from 'react-icons/bs';
 import { CSSTransition } from 'react-transition-group';
 
 import styles from './VideoItem.module.css';
@@ -21,6 +26,7 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
   const [isActuallyPlaying, setIsActuallyPlaying] = useState<boolean>(
     isPlaying || !videoRef.current?.paused
   );
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     if (!videoRef.current) {
@@ -71,6 +77,10 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
       : videoRef.current.play();
   };
 
+  const toggleVolume = () => {
+    setIsMuted((prev) => !prev);
+  };
+
   return (
     <div className={styles.item}>
       {isPlaying || videoRef.current ? (
@@ -78,7 +88,7 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
           ref={videoRef}
           className={styles.video}
           src={video.videoUrl}
-          muted
+          muted={isMuted}
           onClick={togglePause}
           loop
           data-video
@@ -94,14 +104,29 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
       >
         <button type="button" className={styles.stateBtn}>
           {isActuallyPlaying ? (
-            <BsPauseFill size={iconSize} color={iconColor} />
+            <BsPauseFill
+              size={iconSize}
+              color={iconColor}
+              onClick={togglePause}
+            />
           ) : (
-            <BsPlayFill size={iconSize} color={iconColor} />
+            <BsPlayFill
+              size={iconSize}
+              color={iconColor}
+              onClick={togglePause}
+            />
           )}
         </button>
       </CSSTransition>
       <Social video={video} />
       <Info video={video} />
+      <button type="button" className={styles.volumeBtn} onClick={toggleVolume}>
+        {isMuted ? (
+          <BsVolumeMuteFill color="#fff" size={28} />
+        ) : (
+          <BsVolumeDownFill color="#fff" size={28} />
+        )}
+      </button>
     </div>
   );
 };
