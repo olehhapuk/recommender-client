@@ -41,7 +41,11 @@ const Search = () => {
       {searchUsersMutation.data && (
         <div className={styles.resultsList}>
           {searchUsersMutation.data.map((user) => (
-            <Link className={styles.resultsItem} to={`/profile/${user.id}`}>
+            <Link
+              className={styles.resultsItem}
+              to={`/profile/${user.id}`}
+              key={user.id}
+            >
               <img src={user.avatarUrl} alt={user.username} />
               <p>{user.username}</p>
             </Link>
