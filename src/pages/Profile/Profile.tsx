@@ -24,6 +24,7 @@ import { Video } from '@/types/entities/video.entity';
 import Stats from './Stats';
 import UserVideos from './UserVideos';
 import { useEffect, useMemo } from 'react';
+import { updateVideosQuery } from '@/utils/updateVideosQuery';
 
 interface ProfileRouteParams {
   profileId: string;
@@ -192,6 +193,9 @@ const Profile = () => {
                   <UserVideos
                     profileId={+profileId}
                     videos={userVideosQuery.data}
+                    onLiked={(video) =>
+                      updateVideosQuery(queryClient, 'userVideos', video)
+                    }
                   />
                 }
               />

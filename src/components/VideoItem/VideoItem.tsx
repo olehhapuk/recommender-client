@@ -16,12 +16,13 @@ import { Video } from '@/types/entities/video.entity';
 interface VideoItemProps {
   isPlaying: boolean;
   video: Video;
+  onLiked: (video: Video) => void;
 }
 
 const iconSize = 120;
 const iconColor = 'rgba(255, 255, 255, 0.5)';
 
-const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
+const VideoItem = ({ isPlaying, video, onLiked }: VideoItemProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isActuallyPlaying, setIsActuallyPlaying] = useState<boolean>(
     isPlaying || !videoRef.current?.paused
@@ -118,7 +119,7 @@ const VideoItem = ({ isPlaying, video }: VideoItemProps) => {
           )}
         </button>
       </CSSTransition>
-      <Social video={video} />
+      <Social video={video} onLiked={onLiked} />
       <Info video={video} />
       <CSSTransition
         in={!isActuallyPlaying || isMuted}

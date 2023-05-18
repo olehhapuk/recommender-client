@@ -8,9 +8,10 @@ import { Video } from '@/types/entities/video.entity';
 interface VideosListProps {
   videos: Video[];
   initialIndex?: number;
+  onLiked: (video: Video) => void;
 }
 
-const VideosList = ({ videos, initialIndex }: VideosListProps) => {
+const VideosList = ({ videos, initialIndex, onLiked }: VideosListProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -38,7 +39,11 @@ const VideosList = ({ videos, initialIndex }: VideosListProps) => {
     >
       {videos.map((video, i) => (
         <SwiperSlide key={video.id}>
-          <VideoItem video={video} isPlaying={i === currentVideoIndex} />
+          <VideoItem
+            video={video}
+            isPlaying={i === currentVideoIndex}
+            onLiked={onLiked}
+          />
         </SwiperSlide>
       ))}
     </Swiper>

@@ -49,3 +49,27 @@ export const createVideo = async (
   });
   return response.data;
 };
+
+export const likeVideo = async (
+  id: number,
+  authHeader: string
+): Promise<Video> => {
+  const response = await axios.post(`/videos/${id}/like`, null, {
+    headers: {
+      authorization: authHeader,
+    },
+  });
+  return response.data;
+};
+
+export const unlikeVideo = async (
+  id: number,
+  authHeader: string
+): Promise<Video> => {
+  const response = await axios.post(`/videos/${id}/unlike`, null, {
+    headers: {
+      authorization: authHeader,
+    },
+  });
+  return response.data;
+};
